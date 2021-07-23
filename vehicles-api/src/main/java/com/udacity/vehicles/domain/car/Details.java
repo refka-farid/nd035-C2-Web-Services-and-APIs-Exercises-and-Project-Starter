@@ -116,4 +116,7 @@ public class Details {
     public void setExternalColor(String externalColor) {
         this.externalColor = externalColor;
     }
+
+    public Details() {
+    }
 }
