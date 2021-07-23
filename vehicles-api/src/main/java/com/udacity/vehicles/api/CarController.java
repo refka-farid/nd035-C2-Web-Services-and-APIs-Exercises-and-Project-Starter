@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Implements a REST-based controller for the Vehicles API.
  */
 @RestController
-@RequestMapping("/cars")
+@RequestMapping( value = {"/cars"} , produces = {"application/json; charset=UTF-8"})
 class CarController {
 
     private final CarService carService;
@@ -80,7 +80,8 @@ class CarController {
          * TODO: Use the `assembler` on that saved car and return as part of the response.
          *   Update the first line as part of the above implementing.
          */
-        Resource<Car> resource = assembler.toResource(carService.save(car));
+        Car carTobeSaved = carService.save(car);
+        Resource<Car> resource = assembler.toResource(carTobeSaved);
         return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
     }
 

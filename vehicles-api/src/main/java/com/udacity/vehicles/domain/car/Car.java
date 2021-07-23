@@ -4,14 +4,7 @@ import com.udacity.vehicles.domain.Condition;
 import com.udacity.vehicles.domain.Location;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,7 +19,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Car {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @CreatedDate
@@ -107,6 +100,16 @@ public class Car {
     }
 
     public Car() {
+    }
+
+    public Car(Long id, LocalDateTime createdAt, LocalDateTime modifiedAt, Condition condition, Details details, Location location, String price) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+        this.condition = condition;
+        this.details = details;
+        this.location = location;
+        this.price = price;
     }
 
     @Override
